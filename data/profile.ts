@@ -1,5 +1,5 @@
 export const profile = {
-  name: "あなたの名前",
+  name: "Rio Imai",
   role: "Webエンジニアを目指す学生",
   introduction:
     "HTML、CSS、JavaScript、Reactを学びながら、使う人に伝わるWebサイトを制作しています。",

@@ -54,3 +54,32 @@
     justify-content: flex-start;
   }
 }
+
+/* ヘッダー全体のスタイルなどがあればここに書く */
+
+/* リンクのスタイルとアニメーションをクラス名でまとめて書く */
+.navigationLink {
+  position: relative;
+  display: inline-block;
+  text-decoration: none !important; /* もともとの下線を消す */
+  color: inherit; /* 文字色を引き継ぐ */
+}
+
+.navigationLink::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px; /* 文字との隙間はお好みで調整 */
+  height: 2px;
+  background-image: linear-gradient(to left, #0ea5e9, #8b5cf6); /* 2色グラデーション */
+  
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+
+.navigationLink:hover::after {
+  transform: scaleX(1);
+  transform-origin: right;
+}
