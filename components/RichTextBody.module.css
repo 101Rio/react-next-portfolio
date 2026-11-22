@@ -1,5 +1,46 @@
-.body { overflow-wrap: anywhere; }
-.body img { max-width: 100%; height: auto; }
-.body pre { overflow-x: auto; }
-.body table { display: block; max-width: 100%; overflow-x: auto; }
-.body :is(h2, h3, h4, p, ul, ol, blockquote, pre, figure, table) { margin-block: 1em; }
+.body {
+  overflow-wrap: anywhere;
+}
+.body img {
+  max-width: 100%;
+  height: auto;
+}
+.body pre {
+  overflow-x: auto;
+  background: #dfdfd4;
+  padding: 24px;
+  font-size: 13px;
+}
+.body table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+.body th,
+.body td {
+  border: 1px solid var(--line);
+  padding: 12px;
+}
+.body :is(h2, h3, h4, p, ul, ol, blockquote, pre, figure, table) {
+  margin-block: 1.6em;
+}
+.body p:first-child {
+  margin-top: 0;
+}
+.body blockquote {
+  border-left: 2px solid var(--accent);
+  padding-left: 24px;
+  color: var(--color-muted);
+}
+.body a {
+  text-decoration-color: #a36b46;
+}
+.body h2 {
+  font-size: 25px;
+  font-weight: 500;
+}
+.body h3 {
+  font-size: 20px;
+  font-weight: 500;
+}

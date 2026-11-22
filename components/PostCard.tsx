@@ -1,46 +1,34 @@
-import Image from "next/image";
 import Link from "next/link";
+import { Arrow } from "./Arrow";
 import { formatDate } from "@/lib/format-date";
 import type { Post } from "@/types/post";
-import styles from "./ContentListItem.module.css";
-
-type PostCardProps = {
-  post: Post;
-  headingLevel?: "h2" | "h3";
-};
-
+import styles from "./PostCard.module.css";
 export function PostCard({
   post,
   headingLevel = "h2",
-}: PostCardProps) {
+  index = 0,
+}: {
+  post: Post;
+  headingLevel?: "h2" | "h3";
+  index?: number;
+}) {
   const Heading = headingLevel;
-  const itemClassName = post.thumbnail
-    ? `${styles.item} ${styles.withThumbnail}`
-    : styles.item;
-
   return (
-    <article className={itemClassName}>
-      {post.thumbnail ? (
-        <Link className={styles.thumbnailLink} href={`/blog/${post.slug}`}>
-          <Image
-            className={styles.thumbnail}
-            src={post.thumbnail.url}
-            alt={`${post.title}のサムネイル`}
-            width={post.thumbnail.width}
-            height={post.thumbnail.height}
-            sizes="(max-width: 47.99rem) calc(100vw - 2.5rem), 15rem"
-          />
-        </Link>
-      ) : null}
-      <div className={styles.body}>
-        <time className={styles.date} dateTime={post.publishedAt}>
-          {formatDate(post.publishedAt)}
-        </time>
-        <Heading className={styles.title}>
-          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-        </Heading>
-        <p className={styles.description}>{post.description}</p>
-      </div>
+    <article className={styles.post} data-reveal>
+      <Link href={`/blog/${post.slug}`}>
+        <span className={styles.index}>0{index + 1}</span>
+        <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+        <div className={styles.body}>
+          <Heading>{post.title}</Heading>
+          <p>{post.description}</p>
+        </div>
+        <span className={styles.tag}>
+          {post.isSample ? "授業用サンプル" : "LEARNING NOTE"}
+        </span>
+        <span className={styles.arrow}>
+          <Arrow diagonal />
+        </span>
+      </Link>
     </article>
   );
 }

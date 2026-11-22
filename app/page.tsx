@@ -1,56 +1,87 @@
 import Link from "next/link";
 import { Container } from "@/components/Container";
+import { Hero } from "@/components/Hero";
+import { WorkGrid } from "@/components/WorkCard";
+import { Arrow } from "@/components/Arrow";
 import { PostCard } from "@/components/PostCard";
-import { WorkCard } from "@/components/WorkCard";
-import { profile } from "@/data/profile";
+import { WaveText } from "@/components/WaveText";
 import { getPosts } from "@/lib/posts";
 import { getWorks } from "@/lib/works";
 import styles from "./page.module.css";
-
 export default async function HomePage() {
-  const works = (await getWorks()).slice(0, 2);
-  const posts = (await getPosts()).slice(0, 3);
-
+  const [works, posts] = await Promise.all([getWorks(), getPosts()]);
+  const publishedWorks = works.filter((work) => !work.isSample);
   return (
     <>
-      <section className={styles.introductionSection}>
+      <Hero hasWorks={publishedWorks.length > 0} />
+      {publishedWorks.length > 0 && (
+        <section id="selected-works" className={styles.works} aria-labelledby="works-title">
+          <Container>
+            <header className={styles.worksHead}>
+              <h2 id="works-title" className="sectionTitle" lang="en"><WaveText text="Works." trigger="viewport" /></h2>
+              <Link href="/works" className="textLink">作品一覧 <Arrow /></Link>
+            </header>
+            <WorkGrid works={publishedWorks.slice(0, 2)} headingLevel="h3" />
+          </Container>
+        </section>
+      )}
+      <section className={styles.about} aria-labelledby="about-title">
         <Container>
-          <h1>{profile.name}</h1>
-          <p className={styles.role}>{profile.role}</p>
-          <p className={styles.introduction}>{profile.introduction}</p>
-          <nav className={styles.pageLinks} aria-label="主要ページ">
-            <Link href="/profile">プロフィールを見る</Link>
-            <Link href="/works">作品を見る</Link>
-            <Link href="/blog">ブログを見る</Link>
-          </nav>
-        </Container>
-      </section>
-
-      <section className={styles.worksSection}>
-        <Container>
-          <header className={styles.sectionHeader}>
-            <h2>作品</h2>
-            <Link href="/works">すべての作品を見る</Link>
-          </header>
-          <div className={styles.contentList}>
-            {works.map((work) => (
-              <WorkCard key={work.id} work={work} headingLevel="h3" />
-            ))}
+          <div className={styles.aboutGrid}>
+            <header>
+              <span className="eyebrow">02 / ABOUT</span>
+              <h2 id="about-title" className="sectionTitle" lang="en">
+                <WaveText text="About." trigger="viewport" />
+              </h2>
+            </header>
+            <div data-reveal>
+              <h3>
+                つくりながら、
+                <br />
+                仕組みを覚える。
+              </h3>
+              <p>
+                京都の専門学校で、Web制作を学んでいます。
+                <br />
+                HTML・CSSやReactで制作を重ねています。
+                <br className={styles.desktopBreak} />
+                作りたいと思ったサイトやアプリを、自分の手で形にするのが目標です。
+              </p>
+              <Link className="textLink" href="/profile">
+                プロフィール <Arrow diagonal />
+              </Link>
+            </div>
           </div>
         </Container>
       </section>
-
-      <section className={styles.postsSection}>
+      <section className={styles.notes}>
         <Container>
           <header className={styles.sectionHeader}>
-            <h2>最近の記事</h2>
-            <Link href="/blog">すべての記事を見る</Link>
+            <div>
+              <span className="eyebrow">03 / LEARNING NOTES</span>
+              <h2 className="sectionTitle" lang="en">
+                <WaveText text="Notes." trigger="viewport" />
+              </h2>
+            </div>
+            <div className={styles.notesIntro}>
+              <p>
+                {posts.length > 0 && posts.every((post) => post.isSample)
+                  ? "現在は授業用サンプル記事を掲載しています。"
+                  : "Web制作で試したこと、学んだことを記録しています。"}
+              </p>
+              <Link className="textLink" href="/blog">
+                記事一覧 <Arrow />
+              </Link>
+            </div>
           </header>
-          <div className={styles.contentList}>
-            {posts.map((post) => (
-              <PostCard key={post.id} post={post} headingLevel="h3" />
-            ))}
-          </div>
+          {posts.slice(0, 3).map((post, index) => (
+            <PostCard
+              key={post.id}
+              post={post}
+              headingLevel="h3"
+              index={index}
+            />
+          ))}
         </Container>
       </section>
     </>

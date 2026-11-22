@@ -1,24 +1,19 @@
 .page {
-  padding-block: clamp(3.5rem, 8vw, 6rem);
+  padding-bottom: 140px;
+  min-height: 70vh;
 }
-
-.header {
-  max-width: 42rem;
-}
-
-.header h1 {
-  margin: 0;
-  font-size: clamp(2.25rem, 6vw, 3.25rem);
-  letter-spacing: -0.035em;
-  line-height: 1.2;
-}
-
 .header p {
-  margin: 1.25rem 0 0;
+  margin-top: 35px;
+  font-size: 14px;
+  line-height: 2;
   color: var(--color-muted);
-  font-size: 1.025rem;
 }
-
-.list {
-  margin-top: clamp(3rem, 8vw, 5rem);
+@media (max-width: 600px) {
+  .page {
+    padding-bottom: 80px;
+  }
+  .header p {
+    margin-top: 28px;
+    font-size: 12px;
+  }
 }

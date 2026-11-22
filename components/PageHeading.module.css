@@ -1,0 +1,8 @@
+.heading {
+  padding-top: 65px;
+}
+@media (max-width: 700px) {
+  .heading {
+    padding-top: 40px;
+  }
+}

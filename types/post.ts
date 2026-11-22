@@ -9,4 +9,5 @@ export type Post = {
   content: string | string[];
   publishedAt: string;
   thumbnail?: Thumbnail;
+  isSample?: boolean;
 };

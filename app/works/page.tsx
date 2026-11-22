@@ -1,29 +1,50 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Container } from "@/components/Container";
-import { WorkCard } from "@/components/WorkCard";
+import { PageHeading } from "@/components/PageHeading";
+import { WorkGrid } from "@/components/WorkCard";
+import { Arrow } from "@/components/Arrow";
 import { getWorks } from "@/lib/works";
 import styles from "./page.module.css";
-
 export const metadata: Metadata = {
-  title: "作品",
-  description: "授業や自主学習で制作した作品を掲載します。",
+  title: "Works — 制作したもの",
+  description: "制作したWebサイトとアプリの見どころ、使った技術、公開URLを紹介します。",
 };
-
 export default async function WorksPage() {
-  const works = await getWorks();
-
+  const all = await getWorks();
+  const works = all.filter((work) => !work.isSample);
+  const samples = all.filter((work) => work.isSample);
   return (
     <Container className={styles.page}>
       <header className={styles.header}>
-        <h1>作品</h1>
-        <p>授業や自主学習で制作した作品と、制作中に工夫した点を紹介します。</p>
+        <PageHeading label="01 / PROJECT INDEX" title="Works." />
+        <div className={styles.intro}>
+          <p>
+            つくったものを、
+            <br />
+            画面と仕組みから。
+          </p>
+          <span>作品ごとに制作メモと公開サイトをまとめました。</span>
+        </div>
       </header>
-
-      <div className={styles.list}>
-        {works.map((work) => (
-          <WorkCard key={work.id} work={work} />
-        ))}
-      </div>
+      <WorkGrid works={works} />
+      {samples.length > 0 && (
+        <aside className={styles.samples}>
+          <div>
+            <span className="eyebrow">CLASS SAMPLES</span>
+            <p>授業用サンプル</p>
+          </div>
+          <div>
+            {samples.map((work) => (
+              <Link href={`/works/${work.slug}`} key={work.id}>
+                <span>{work.title}</span>
+                <Arrow diagonal />
+              </Link>
+            ))}
+            <p>作品ページの作り方を学ぶためのデータです。</p>
+          </div>
+        </aside>
+      )}
     </Container>
   );
 }

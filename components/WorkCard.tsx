@@ -1,41 +1,74 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Arrow } from "./Arrow";
 import type { Work } from "@/types/work";
-import styles from "./ContentListItem.module.css";
+import styles from "./WorkCard.module.css";
 
-type WorkCardProps = {
-  work: Work;
-  headingLevel?: "h2" | "h3";
-};
+type HeadingLevel = "h2" | "h3";
+
+export function WorkGrid({
+  works,
+  headingLevel = "h2",
+}: {
+  works: Work[];
+  headingLevel?: HeadingLevel;
+}) {
+  return (
+    <div className={styles.grid}>
+      {works.map((work, index) => (
+        <WorkCard key={work.id} work={work} headingLevel={headingLevel} index={index} />
+      ))}
+    </div>
+  );
+}
 
 export function WorkCard({
   work,
-  headingLevel = "h2",
-}: WorkCardProps) {
-  const Heading = headingLevel;
-  const itemClassName = work.thumbnail
-    ? `${styles.item} ${styles.withThumbnail}`
-    : styles.item;
-
+  headingLevel: Heading = "h2",
+  index = 0,
+}: {
+  work: Work;
+  headingLevel?: HeadingLevel;
+  index?: number;
+}) {
   return (
-    <article className={itemClassName}>
-      {work.thumbnail ? (
-        <Link className={styles.thumbnailLink} href={`/works/${work.slug}`}>
+    <article className={styles.card} data-reveal>
+      {work.thumbnail && (
+        <div className={styles.visual}>
           <Image
-            className={styles.thumbnail}
             src={work.thumbnail.url}
-            alt={`${work.title}のサムネイル`}
+            alt={work.imageAlt ?? work.title}
             width={work.thumbnail.width}
             height={work.thumbnail.height}
-            sizes="(max-width: 47.99rem) calc(100vw - 2.5rem), 15rem"
+            loading={index === 0 ? "eager" : "lazy"}
+            sizes="(max-width: 700px) 94vw, (max-width: 1680px) 46vw, 760px"
           />
-        </Link>
+        </div>
+      )}
+      {work.technologies?.length ? (
+        <p className={styles.tools}>{work.technologies.join(" / ")}</p>
       ) : null}
-      <div className={styles.body}>
-        <Heading className={styles.title}>
-          <Link href={`/works/${work.slug}`}>{work.title}</Link>
-        </Heading>
-        <p className={styles.description}>{work.description}</p>
+      <Heading className={styles.title}>{work.title}</Heading>
+      <p className={styles.description}>{work.description}</p>
+      <div className={styles.actions}>
+        <Link
+          href={`/works/${work.slug}`}
+          className={styles.caseLink}
+          aria-label={`${work.title}の制作メモを読む`}
+        >
+          制作メモ
+        </Link>
+        {work.siteUrl && (
+          <a
+            className={styles.siteLink}
+            href={work.siteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${work.title}の公開サイトを開く（新しいタブ）`}
+          >
+            公開サイトを開く <Arrow diagonal />
+          </a>
+        )}
       </div>
     </article>
   );

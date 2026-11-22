@@ -1,84 +1,140 @@
 .page {
-  padding-block: clamp(3.5rem, 8vw, 6rem);
+  padding-bottom: 85px;
 }
-
 .header {
-  max-width: 42rem;
+  padding-bottom: 50px;
 }
-
-.header h1 {
-  margin: 0;
-  font-size: clamp(2.25rem, 6vw, 3.25rem);
-  letter-spacing: -0.035em;
-  line-height: 1.2;
-}
-
-.header p {
-  margin: 1.25rem 0 0;
-  color: var(--color-muted);
-  font-size: 1.025rem;
-}
-
-.sections {
-  margin-top: clamp(3rem, 8vw, 5rem);
-}
-
-.section {
+.identity {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 60px 0 75px;
   display: grid;
-  gap: 1.5rem;
-  border-top: 1px solid var(--color-border);
-  padding-block: 2rem;
+  grid-template-columns: 1fr 1.6fr;
+  align-items: end;
+  gap: 70px;
 }
-
-.section:last-child {
-  border-bottom: 1px solid var(--color-border);
+.name > span {
+  font: 11px var(--font-mono);
 }
-
-.section h2 {
-  margin: 0;
-  font-size: 1.125rem;
-  line-height: 1.5;
+.name h2 {
+  font-size: clamp(30px, 3.6vw, 54px);
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: -0.04em;
+  margin: 30px 0 0;
 }
-
-.definitionList {
+.identity p {
+  font-size: 13px;
+  line-height: 2.2;
+  max-width: 40em;
+}
+.row {
   display: grid;
-  gap: 1rem;
-  margin: 0;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 70px;
+  padding: 70px 0;
+  border-bottom: 1px solid var(--line);
 }
-
-.definitionList div {
-  display: grid;
-  gap: 0.2rem;
+.row h2 {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.8;
+  margin-top: 22px;
 }
-
-.definitionList dt {
-  color: var(--color-muted);
-  font-size: 0.8125rem;
-  font-weight: 600;
+.row p {
+  font-size: 14px;
+  line-height: 2.2;
 }
-
-.definitionList dd {
-  margin: 0;
-}
-
-.simpleList {
-  display: grid;
-  gap: 0.5rem;
-  margin: 0;
-  padding-left: 1.25rem;
-}
-
-.linkList {
-  display: grid;
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0;
+.skills {
   list-style: none;
+  padding: 0;
+  margin: 35px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 35px;
 }
-
-@media (min-width: 48rem) {
-  .section {
-    grid-template-columns: 11rem minmax(0, 1fr);
-    gap: 3rem;
+.skills li {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  font-size: 22px;
+}
+.skills li > span {
+  font: 9px var(--font-mono);
+  color: var(--muted);
+}
+.goals {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.goals li {
+  display: flex;
+  gap: 30px;
+  align-items: baseline;
+  margin: 0 0 24px;
+}
+.goals li:last-child {
+  margin: 0;
+}
+.goals li > span {
+  font: 10px var(--font-mono);
+  color: var(--accent);
+}
+.row .small {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 20px;
+}
+.workLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px 0 0;
+  font-size: 18px;
+}
+.workLink:hover {
+  color: var(--accent);
+}
+@media (max-width: 700px) {
+  .page {
+    padding-bottom: 60px;
+  }
+  .header {
+    padding-bottom: 30px;
+  }
+  .identity {
+    display: block;
+    padding: 35px 0;
+  }
+  .name h2 {
+    font-size: 32px;
+  }
+  .identity p {
+    margin-top: 22px;
+    font-size: 12px;
+  }
+  .row {
+    display: block;
+    padding: 40px 0;
+  }
+  .row h2 {
+    font-size: 21px;
+    margin: 15px 0 26px;
+  }
+  .row p {
+    font-size: 12px;
+  }
+  .skills {
+    gap: 15px 25px;
+  }
+  .skills li {
+    font-size: 20px;
+  }
+  .goals li {
+    gap: 20px;
+  }
+  .row .small {
+    font-size: 11px;
   }
 }

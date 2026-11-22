@@ -2,6 +2,7 @@ import type { Post } from "@/types/post";
 
 export const samplePosts: Post[] = [
   {
+    isSample: true,
     id: "first-post",
     slug: "first-post",
     title: "ポートフォリオ制作を始めました",
@@ -20,6 +21,7 @@ export const samplePosts: Post[] = [
     },
   },
   {
+    isSample: true,
     id: "react-learning",
     slug: "react-learning",
     title: "Reactポケモン図鑑で学んだこと",
@@ -38,6 +40,7 @@ export const samplePosts: Post[] = [
     },
   },
   {
+    isSample: true,
     id: "future-plan",
     slug: "future-plan",
     title: "これから追加したい内容",

@@ -1,24 +1,77 @@
 .page {
-  padding-block: clamp(3.5rem, 8vw, 6rem);
+  padding-bottom: 100px;
 }
-
 .header {
-  max-width: 42rem;
+  margin-bottom: 70px;
 }
-
-.header h1 {
-  margin: 0;
-  font-size: clamp(2.25rem, 6vw, 3.25rem);
-  letter-spacing: -0.035em;
-  line-height: 1.2;
+.intro {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: 30px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 35px;
 }
-
-.header p {
-  margin: 1.25rem 0 0;
-  color: var(--color-muted);
-  font-size: 1.025rem;
+.intro p {
+  font-size: 21px;
+  line-height: 1.9;
 }
-
-.list {
-  margin-top: clamp(3rem, 8vw, 5rem);
+.intro > span {
+  font-size: 11px;
+  color: var(--muted);
+}
+.samples {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  border-top: 1px solid var(--line);
+  padding-top: 35px;
+  margin-top: 100px;
+  gap: 30px;
+}
+.samples p {
+  font-size: 12px;
+  line-height: 2;
+  margin-top: 16px;
+}
+.samples a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  font-size: 21px;
+  padding: 0 0 20px;
+  border-bottom: 1px solid var(--line);
+}
+.samples a:hover {
+  color: var(--accent);
+}
+.samples > div:last-child > p {
+  color: var(--muted);
+}
+@media (max-width: 700px) {
+  .page {
+    padding-bottom: 65px;
+  }
+  .header {
+    margin-bottom: 35px;
+  }
+  .intro {
+    display: block;
+  }
+  .intro p {
+    font-size: 18px;
+  }
+  .intro > span {
+    display: block;
+    margin-top: 20px;
+    font-size: 10px;
+  }
+  .samples {
+    display: block;
+    margin-top: 65px;
+  }
+  .samples > div + div {
+    margin-top: 28px;
+  }
 }

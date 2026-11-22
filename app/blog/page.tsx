@@ -1,31 +1,26 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/Container";
-import { PostCard } from "@/components/PostCard";
+import { PageHeading } from "@/components/PageHeading";
+import { JournalList } from "@/components/JournalList";
 import { getPosts } from "@/lib/posts";
 import styles from "./page.module.css";
-
 export const metadata: Metadata = {
-  title: "ブログ",
-  description: "授業で学んだ内容、制作記録、試したことを掲載します。",
+  title: "Notes — 学びの記録",
+  description: "Rio ImaiのWeb制作と学習の記録。",
 };
-
 export default async function BlogPage() {
   const posts = await getPosts();
-
   return (
     <Container className={styles.page}>
       <header className={styles.header}>
-        <h1>ブログ</h1>
+        <PageHeading label="03 / LEARNING NOTES" title="Notes." />
         <p>
-          授業で学んだ内容、制作中に起きた問題、試したことを記録します。
+          {posts.length > 0 && posts.every((post) => post.isSample)
+            ? "現在は授業用サンプル記事を掲載しています。"
+            : "Web制作で試したこと、学んだことを記録しています。"}
         </p>
       </header>
-
-      <div className={styles.list}>
-        {posts.map((post) => (
-          <PostCard key={post.id} post={post} />
-        ))}
-      </div>
+      <JournalList posts={posts} />
     </Container>
   );
 }

@@ -1,69 +1,101 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Container } from "@/components/Container";
+import { PageHeading } from "@/components/PageHeading";
+import { Arrow } from "@/components/Arrow";
 import { profile } from "@/data/profile";
 import styles from "./page.module.css";
-
 export const metadata: Metadata = {
-  title: "プロフィール",
-  description: "自己紹介、学習中の技術、今後の目標を掲載しています。",
+  title: "About — わたしについて",
+  description:
+    "京都でWeb制作を学ぶRio Imaiのプロフィールと、いま学んでいること。",
 };
-
 export default function ProfilePage() {
   return (
     <Container className={styles.page}>
       <header className={styles.header}>
-        <h1>プロフィール</h1>
-        <p>{profile.introduction}</p>
+        <PageHeading label="02 / ABOUT ME" title="About." />
       </header>
-
-      <div className={styles.sections}>
-        <section className={styles.section}>
-          <h2>基本情報</h2>
-          <dl className={styles.definitionList}>
-            <div>
-              <dt>名前</dt>
-              <dd>{profile.name}</dd>
-            </div>
-            <div>
-              <dt>目指していること</dt>
-              <dd>{profile.role}</dd>
-            </div>
-            <div>
-              <dt>活動地域</dt>
-              <dd>{profile.location}</dd>
-            </div>
-          </dl>
-        </section>
-
-        <section className={styles.section}>
-          <h2>学習中の技術</h2>
-          <ul className={styles.simpleList}>
-            {profile.skills.map((skill) => (
-              <li key={skill}>{skill}</li>
-            ))}
-          </ul>
-        </section>
-
-        <section className={styles.section}>
-          <h2>今後の目標</h2>
-          <ul className={styles.simpleList}>
-            {profile.learningGoals.map((goal) => (
-              <li key={goal}>{goal}</li>
-            ))}
-          </ul>
-        </section>
-
-        <section className={styles.section}>
-          <h2>リンク</h2>
-          <ul className={styles.linkList}>
-            {profile.links.map((link) => (
-              <li key={link.label}>
-                <a href={link.href}>{link.label}</a>
+      <section className={styles.identity}>
+        <div className={styles.name}>
+          <span>RIO IMAI</span>
+          <h2>
+            つくりながら、
+            <br />
+            仕組みを覚える。
+          </h2>
+        </div>
+        <p>
+          京都の専門学校で、Web制作を学んでいます。
+          <br />
+          {profile.introduction}
+        </p>
+      </section>
+      <section className={styles.row}>
+        <div>
+          <span className="eyebrow">CURRENTLY LEARNING</span>
+          <h2>いま、学んでいること。</h2>
+        </div>
+        <div>
+          <p>
+            ページの構造から、見た目、動き、データの扱いへ。
+            <br />
+            一つずつ実装しながら、理解を深めています。
+          </p>
+          <ul className={styles.skills}>
+            {profile.skills.map((skill, index) => (
+              <li key={skill}>
+                <span>0{index + 1}</span>
+                {skill}
               </li>
             ))}
           </ul>
-        </section>
-      </div>
+        </div>
+      </section>
+      <section className={styles.row}>
+        <div>
+          <span className="eyebrow">NEXT STEPS</span>
+          <h2>これからできるように。</h2>
+        </div>
+        <ol className={styles.goals}>
+          {profile.learningGoals.map((goal, index) => (
+            <li key={goal}>
+              <span>0{index + 1}</span>
+              <p>{goal}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+      <section className={styles.row}>
+        <div>
+          <span className="eyebrow">OFF SCREEN</span>
+          <h2>画面の外では。</h2>
+        </div>
+        <div>
+          <p>
+            音楽を聴くこと。CDを集めること。
+            <br />
+            イヤホンの音を聴き比べること。ゲームをすること。
+          </p>
+          <p className={styles.small}>
+            同じ音楽でも、録音や再生する機器で聞こえ方が変わる。
+            <br />
+            そんな違いを楽しむ時間が好きです。
+          </p>
+          <a
+            className="textLink"
+            href={profile.personalSiteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            自己紹介サイトを見る <Arrow diagonal />
+          </a>
+        </div>
+      </section>
+      <Link className={styles.workLink} href="/works">
+        <span>制作したものを見る</span>
+        <Arrow diagonal />
+      </Link>
     </Container>
   );
 }

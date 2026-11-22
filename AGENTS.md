@@ -57,3 +57,13 @@ npm run test:curriculum
 Curriculum walkthroughはstarter、blog-list、both-lists、blog-detail、completeの5段階を検証します。テストのためのモックはCI専用です。学生の公開サイトへ組み込まず、実CMSに接続したと偽装しません。
 
 CIの成功はモック環境のコード検証です。Notionのコードとstepsの一致、Notionのテーブル・コードブロックの保存状態、実CMSの画面・権限・画像、Vercelの公開、実際の更新反映、ブラウザ操作は別途確認し、未確認の作業を完了と報告しません。
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

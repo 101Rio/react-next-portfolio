@@ -1,0 +1,72 @@
+.wave {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  white-space: pre;
+  --rise: 0.7em;
+  --softness: 0.035em;
+  --wave-ease: cubic-bezier(0.5, 0.2, 0.01, 1);
+}
+.accessibleText {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  text-transform: none;
+  user-select: none;
+}
+.mask {
+  display: block;
+  overflow: clip;
+  padding: 0.06em 0.08em;
+  margin: -0.06em -0.08em;
+}
+.glyph {
+  display: inline-block;
+  --delay: calc(var(--wave-lead, 0ms) + var(--letter) * 52ms);
+}
+.period {
+  color: var(--wave-period, currentColor);
+  margin-inline-start: var(--wave-period-gap, 0);
+  vertical-align: baseline;
+}
+/* At this weight Geist leaves 0.01em less space after t than after s. */
+.period[data-after="t"] {
+  margin-inline-start: calc(var(--wave-period-gap, 0px) * 1.1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  :global(html[data-motion="on"]:not([data-opening])) .wave[data-wave="page"] .glyph,
+  :global(html[data-motion="on"]:not([data-opening])) .wave[data-wave="viewport"][data-visible] .glyph {
+    animation: waveIn 1.28s var(--wave-ease) var(--delay) backwards;
+  }
+  :global(html[data-motion="on"][data-opening]) .wave:not([data-wave="index"]) .glyph,
+  :global(html[data-motion="on"]) .wave[data-wave="viewport"]:not([data-visible]) .glyph {
+    opacity: 0;
+  }
+  :global(html[data-motion="on"]) .wave[data-wave="index"] .glyph {
+    opacity: 0;
+    transform: translateY(var(--rise));
+    filter: blur(var(--softness));
+    transition: opacity 180ms ease-out, transform 300ms ease-out, filter 240ms ease-out;
+  }
+  :global(html[data-motion="on"] #site-index:not([inert])) .wave[data-wave="index"] .glyph {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: transform 1.28s var(--wave-ease) var(--delay),
+      opacity 850ms ease-out var(--delay), filter 1s ease-out var(--delay);
+  }
+}
+@keyframes waveIn {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise));
+    filter: blur(var(--softness));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
