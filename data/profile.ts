@@ -5,7 +5,7 @@ export const profile = {
     "HTML、CSS、JavaScript、Reactを学びながら、使う人に伝わるWebサイトを制作しています。",
   personalSiteUrl: "https://101rio.github.io/about-me/",
   location: "京都",
-  skills: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
+  skills: ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "Python"],
   learningGoals: [
     "Webサイトの目的に合わせて情報を設計する",
     "作りたいサイトやアプリの機能をReactやNext.jsで実装する",
